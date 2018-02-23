@@ -1,7 +1,7 @@
 
 'use strict';
 var mongoose = require('mongoose'),
-    ObjectId = mongoose.Types.ObjectId,
+    ObjectId = mongoose.Schema.Types.ObjectId,
     extend = require('mongoose-schema-extend');
 var BaseModel = require("./base");
 
@@ -66,6 +66,6 @@ const ProfileSchema = BaseModel.extend({
             {$set : { isDeleted : true }},callback);
     };
     // ProfileSchema.methods.
-var ProfileModel = mongoose.model('User', ProfileSchema);
+var ProfileModel = mongoose.model('Profile', ProfileSchema);
 
 module.exports = ProfileModel; 
