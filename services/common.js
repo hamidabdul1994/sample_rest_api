@@ -1,9 +1,17 @@
-/**
- * Purpose to handle common services
- **/
-module.exports = {
-    response : new Response()
+/***
+ * @description Purpose to handle common services
+ * @author Hamid Raza Noori
+ ***/
+function CommonService(){
+
 }
+
+CommonService.prototype.response = new Response();
+
+module.exports = new CommonService() ;
+
+
+
 
 //function Hoisting
 function Response(status,message,data){
