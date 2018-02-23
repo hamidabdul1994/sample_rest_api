@@ -8,10 +8,12 @@ const UserSchema =BaseModel.extend({
         firstName: String, 
         lastName: String, 
         emailAddress : {
+            type:String,
             required:true,
             unique:true
         },
         phoneNumber:{
+            type:String,
             required:true,
             unique:true    
         }

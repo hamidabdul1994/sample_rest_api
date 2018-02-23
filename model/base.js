@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var BaseSchema = new Schema({
       updatedAt: Date,
       isDeleted:{
-        type:boolean,
+        type:String,
         default:false
       },
       createdAt:{

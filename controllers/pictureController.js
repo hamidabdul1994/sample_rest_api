@@ -7,7 +7,7 @@ module.exports = {
     "uploadPicture":(req,res,next)=>{
         var responseObj = commonService.response;
             if (req.files) {
-            if (req.files.filename.data.toString('hex',0,4) ==  '89504e47' || req.files.filename.data.toString('hex',0,4) == 'ffd8ffe0' || req.files.filename.data.toString('hex',0,4) == '47494638' ) {
+            if (profileService.isImage(profileService.convertToHexCode(files.filename.data))) {
                 var file = req.files.filename
                 filename = file.name
                 file.mv(__dirname+'/public/upload/'+filename,(err) => {
