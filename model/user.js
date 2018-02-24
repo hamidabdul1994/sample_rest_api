@@ -9,13 +9,13 @@ const UserSchema = BaseModel.extend({
         lastName: String, 
         emailAddress : {
             type:String,
-            required:true,
-            unique:true
+            required:true
+            // ,unique:true
         },
-        phoneNumber:{
+        phoneNumber : {
             type:String,
-            required:true,
-            unique:true    
+            required:true
+            // ,unique:true    
         }
     });
     
@@ -40,14 +40,16 @@ const UserSchema = BaseModel.extend({
      * @description read Employee Details emailAddress
      ***/
     UserSchema.statics.readUser = function(emailAddress,callback){
-        this.findOne({emailAddress : emailAddress , isDeleted : false},callback);
+        this.findOne({emailAddress : emailAddress , isDeleted : false},{
+            createdAt : 1,firstName : 1,lastName : 1,emailAddress : 1,phoneNumber : 1
+        },callback);
     };
 
     /****
      * @description to update Employee Details by emailAddress
      ***/
-    UserSchema.statics.readUser = function(userObj,callback){
-        if(userObj.emailAddress){
+    UserSchema.statics.updateUser = function(userObj,callback){
+        if(!userObj.emailAddress){
             return callback("emailAddress is required for update");
         }
         this.update({emailAddress : userObj.emailAddress , isDeleted : false},
@@ -59,12 +61,18 @@ const UserSchema = BaseModel.extend({
      * @description to remove Employee Details by emailAddress
      ***/
     UserSchema.statics.removeUser = function(emailAddress,callback){
-        if(emailAddress){
-            return callback("emailAddress is required for update");
+        if(!emailAddress){
+            return callback({msg:"emailAddress is required for update"});
         }
         this.update({ emailAddress : emailAddress , isDeleted : false },
             {$set : { isDeleted : true }},callback);
     };
+
+    UserSchema.statics.readAllUser = function(callback){
+        this.find({isDeleted:false},{
+            createdAt : 1,firstName : 1,lastName : 1,emailAddress : 1,phoneNumber : 1
+        },callback);
+    }
     // UserSchema.methods.
 var UserModel = mongoose.model('User', UserSchema);
 

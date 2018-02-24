@@ -5,11 +5,11 @@ var profileController = require("../controllers").pictureController;
 var userController = require("../controllers").usersController;
 
 /* POST */
-router.post('/addEmployee', userController.addEmployee);
-router.delete("/deleteEmployee",userController.deleteEmployee);
-router.get("/readEmployee",userController.readEmployee);
-router.get("/readAllEmployee",userController.readAllEmployee);
-router.put("/updateEmployee",userController.updateEmployee);
+router.post('/addEmployee' , userController.addEmployeeValidator , userController.addEmployee);
+router.delete("/deleteEmployee" , userController.commonValidator , userController.deleteEmployee);
+router.get("/readEmployee" , userController.commonValidator , userController.readEmployee);
+router.put("/updateEmployee" , userController.commonValidator , userController.updateEmployee);
+router.get("/readAllEmployee" , userController.readAllEmployee);
 
 router.post("/uploadPicture",upload(),profileController.uploadPicture);
 

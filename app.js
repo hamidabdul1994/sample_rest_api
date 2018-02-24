@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var config = require("./config");
 var routes = require('./routes/');
 //Init DB
 var model = require("./model").init();
@@ -40,8 +40,10 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   var responseObj = commonService.response;
   responseObj.setStatus(false);
-  responseObj.setMessage(err.message);
+  responseObj.setMessage(err.message || err.msg || "Something bad happened try again");
 
+  if(!config.isProduction)
+    console.trace(err);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   

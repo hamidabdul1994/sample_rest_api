@@ -48,7 +48,7 @@ const ProfileSchema = BaseModel.extend({
      ***/
     ProfileSchema.statics.updateProfile = function(profileObj,callback){
         if(profileObj.profileId){
-            return callback("_id is required for update");
+            return callback("profileId is required for update");
         }
         this.update({_id : profileObj.profileId , isDeleted : false},
             { $set: profileObj },callback);

@@ -8,4 +8,6 @@ if(envList.indexOf(env) == -1){
 }
 config = require("./"+env);
 
+config.imageLocation = "./public/upload/"
+
 module.exports = config;
