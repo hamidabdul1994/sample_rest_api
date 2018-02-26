@@ -41,7 +41,7 @@ app.use(function(err, req, res, next) {
   var responseObj = commonService.response;
   responseObj.setStatus(false);
   responseObj.setMessage(err.message || err.msg || "Something bad happened try again");
-
+  responseObj.setData();
   if(!config.isProduction)
     console.trace(err);
   res.locals.message = err.message;

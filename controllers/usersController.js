@@ -79,6 +79,19 @@ module.exports = {
             res.send(responseObj);
         });
     },
+    userIdMiddleWare : function(req,res,next){
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return next(errors.array({ onlyFirstError: true })[0] || {});
+        }
+        let emailAddress = req.query.emailAddress || req.body.emailAddress;
+        userService.readUser(emailAddress,function(err,userDoc){
+            if(err || !userDoc)
+                return next(err || {msg:"Email Address don't exist"});
+            req.userId = userDoc._id;
+            next();
+        });
+    },
     commonValidator : [
         check('emailAddress')
         .isEmail().withMessage('emailAddress ,must be an email')
